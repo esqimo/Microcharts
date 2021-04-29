@@ -272,7 +272,7 @@ namespace Microcharts
                     var entry = Entries.ElementAt(i);
                     if (!string.IsNullOrEmpty(entry.ValueLabel))
                     {
-                        DrawHelper.DrawLabel(canvas, orientation, isTop ? YPositionBehavior.UpToElementHeight : YPositionBehavior.None, itemSize, points[i], colors[i], sizes[i], texts[i], LabelTextSize, Typeface);
+                        DrawHelper.DrawLabel(canvas, orientation, isTop ? YPositionBehavior.UpToElementHeight : YPositionBehavior.None, entry.ValueLabelFitToBar ? itemSize : SKSize.Empty, points[i], colors[i], sizes[i], texts[i], LabelTextSize, Typeface);
                     }
                 }
             }

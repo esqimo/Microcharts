@@ -61,6 +61,18 @@ namespace Microcharts
         /// <value>The color of the value label.</value>
         public SKColor ValueLabelColor { get; set; } = SKColors.Black;
 
+        /// <summary>
+        /// Determines if the label for the value is truncated to fit the width of the bar, point or line in the chart.
+        /// Defaults to true.
+        /// </summary>
+        public bool ValueLabelFitToBar { get; set; } = true;
+
+        /// <summary>
+        /// Determines the vertical position for the value's label, in relation to the bar, point or line in the chart.
+        /// Defaults to appearing above the bar (UpToElementHeight).
+        /// </summary>
+        public YPositionBehavior? ValueLabelYPositionBehavior { get; set; }
+
         #endregion
     }
 }
