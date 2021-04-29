@@ -54,11 +54,17 @@ namespace Microcharts
 
             var drawedPoint = new SKPoint(barX - (itemSize.Width / 2) + (barSize.Width / 2), barY);
             if (ValueLabelOption == ValueLabelOption.TopOfChart)
-                base.DrawValueLabel(canvas, valueLabelSizes, headerWithLegendHeight, itemSize, barSize, entry, barX, barY, itemX, origin);
-            else if (ValueLabelOption == ValueLabelOption.TopOfElement)
-                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, ValueLabelOrientation == Orientation.Vertical ? YPositionBehavior.UpToElementHeight : YPositionBehavior.None, barSize, new SKPoint(drawedPoint.X, drawedPoint.Y - (PointSize / 2) - (Margin / 2)), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface);
+                base.DrawValueLabel(canvas, valueLabelSizes, headerWithLegendHeight, itemSize, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, entry, barX, barY, itemX, origin);
+            else if(ValueLabelOption == ValueLabelOption.TopOfElement)
+            {
+                var behavior = ValueLabelOrientation == Orientation.Vertical
+                    ? YPositionBehavior.UpToElementHeight
+                    : YPositionBehavior.None;
+
+                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, behavior, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, new SKPoint(drawedPoint.X, drawedPoint.Y - (PointSize / 2) - (Margin / 2)), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface);
+            }
             else if (ValueLabelOption == ValueLabelOption.OverElement)
-                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, ValueLabelOrientation == Orientation.Vertical ? YPositionBehavior.UpToElementMiddle : YPositionBehavior.DownToElementMiddle, barSize, new SKPoint(drawedPoint.X, drawedPoint.Y), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface);
+                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, ValueLabelOrientation == Orientation.Vertical ? YPositionBehavior.UpToElementMiddle : YPositionBehavior.DownToElementMiddle, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, new SKPoint(drawedPoint.X, drawedPoint.Y), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface);
         }
 
         /// <inheritdoc />
