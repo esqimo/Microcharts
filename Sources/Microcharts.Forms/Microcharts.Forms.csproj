@@ -1,18 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <!-- 
+        See https://stackoverflow.com/a/56018426/2810461
+
+        This allows the Microcharts.dll to be included in the Forms package (along with PrivateAssets in ProjectReference).
+        It makes for a lot more simple packaging, given we are not publishing to Nuget.
+     -->
+    <PropertyGroup>
+        <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+    </PropertyGroup>
+    <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+        <ItemGroup>
+            <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+        </ItemGroup>
+    </Target>
+
     <PropertyGroup>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <Version>0.9.5.1</Version>
-        <AssemblyVersion>0.9.5.1</AssemblyVersion>
-        <FileVersion>0.9.5.1</FileVersion>
-        <Title>Microcharts.Forms</Title>
+        <Title>Microcharts.Forms.Ziglu</Title>
         <Description>Simple, cross-platform chart library.</Description>
-        <Copyright>Copyright 2020</Copyright>
-        <PackageLicenseUrl>https://github.com/dotnet-ad/Microcharts/blob/main/LICENSE</PackageLicenseUrl>
-        <PackageProjectUrl>https://github.com/dotnet-ad/Microcharts</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/dotnet-ad/Microcharts</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/esqimo/Microcharts</PackageProjectUrl>
+        <PackageVersion>1.0.5</PackageVersion>
+        <RepositoryUrl>https://github.com/esqimo/Microcharts</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <Authors>Aloïs Deniel, Ed Lomonaco</Authors>
+        <Authors>Ziglu, Aloïs Deniel, Ed Lomonaco</Authors>
         <PackageTags>xamarin ios android chart skia Forms</PackageTags>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -34,6 +45,6 @@
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Microcharts\Microcharts.csproj" />
+        <ProjectReference Include="..\Microcharts\Microcharts.csproj" PrivateAssets="All" />
     </ItemGroup>
 </Project>
