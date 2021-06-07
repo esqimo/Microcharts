@@ -120,6 +120,11 @@ namespace Microcharts
                             x = 0;
                         if(x > canvas.LocalClipBounds.Width - bounds.Width)
                             x = canvas.LocalClipBounds.Width - bounds.Width;
+                        // also on the y axis
+                        if(y < 0)
+                            y = 0;
+                        if(y > canvas.LocalClipBounds.Height - bounds.Height)
+                            y = canvas.LocalClipBounds.Height - bounds.Height;
 
                         canvas.Translate(x, y);
                     }
