@@ -124,7 +124,10 @@ namespace Microcharts
                         if(y < 0)
                             y = 0;
                         if(y > canvas.LocalClipBounds.Height - bounds.Height)
-                            y = canvas.LocalClipBounds.Height - bounds.Height;
+                        {
+                            // if we're going to go outside the clip area, move it to the top of the point, instead of bottom
+                            y = point.Y - bounds.Height;
+                        }
 
                         canvas.Translate(x, y);
                     }

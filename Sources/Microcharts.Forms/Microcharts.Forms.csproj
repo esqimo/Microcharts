@@ -20,7 +20,7 @@
         <Title>Microcharts.Forms.Ziglu</Title>
         <Description>Simple, cross-platform chart library.</Description>
         <PackageProjectUrl>https://github.com/esqimo/Microcharts</PackageProjectUrl>
-        <PackageVersion>1.0.5</PackageVersion>
+        <PackageVersion>1.0.7</PackageVersion>
         <RepositoryUrl>https://github.com/esqimo/Microcharts</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <Authors>Ziglu, Aloïs Deniel, Ed Lomonaco</Authors>
