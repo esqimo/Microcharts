@@ -142,7 +142,7 @@ namespace Microcharts
 
                           }
 
-                          DrawHelper.DrawLabel(canvas, ValueLabelOrientation, DrawHelper.ComputeEntryYPositionBehavior(entry, yPositionBehavior), entry.ValueLabelFitToBar ? itemSize : SKSize.Empty, point, entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSize, entry.ValueLabel, ValueLabelTextSize, Typeface);
+                          DrawHelper.DrawLabel(canvas, ValueLabelOrientation, DrawHelper.ComputeEntryYPositionBehavior(entry, yPositionBehavior), entry.ValueLabelFitToBar ? itemSize : SKSize.Empty, point, entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSize, entry.ValueLabel, ValueLabelTextSize, Typeface, Margin);
                         }
                     }
                 }
