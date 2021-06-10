@@ -63,9 +63,9 @@ namespace Microcharts
             if(ValueLabelOption == ValueLabelOption.TopOfChart)
                 base.DrawValueLabel(canvas, valueLabelSizes, headerWithLegendHeight, itemSize, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, entry, barX, barY, itemX, origin);
             else if(ValueLabelOption == ValueLabelOption.TopOfElement)
-                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, ValueLabelOrientation == Orientation.Vertical ? YPositionBehavior.UpToElementHeight : YPositionBehavior.None, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, new SKPoint(location.X + size.Width / 2, barY - Margin), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface);
+                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, ValueLabelOrientation == Orientation.Vertical ? YPositionBehavior.UpToElementHeight : YPositionBehavior.None, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, new SKPoint(location.X + size.Width / 2, barY - Margin), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface, Margin);
             else if(ValueLabelOption == ValueLabelOption.OverElement)
-                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, ValueLabelOrientation == Orientation.Vertical ? YPositionBehavior.UpToElementMiddle : YPositionBehavior.DownToElementMiddle, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, new SKPoint(location.X + size.Width / 2, barY + (origin - barY) / 2), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface);
+                DrawHelper.DrawLabel(canvas, ValueLabelOrientation, ValueLabelOrientation == Orientation.Vertical ? YPositionBehavior.UpToElementMiddle : YPositionBehavior.DownToElementMiddle, entry.ValueLabelFitToBar ? barSize : SKSize.Empty, new SKPoint(location.X + size.Width / 2, barY + (origin - barY) / 2), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface, Margin);
         }
 
         /// <inheritdoc />

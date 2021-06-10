@@ -219,7 +219,7 @@ namespace Microcharts
                     }
 
                     if(!string.IsNullOrEmpty(label))
-                        DrawHelper.DrawLabel(canvas, LabelOrientation, YPositionBehavior.None, itemSize, new SKPoint(itemX, height - footerWithLegendHeight + Margin), LabelColor, labelSize, label, LabelTextSize, Typeface);
+                        DrawHelper.DrawLabel(canvas, LabelOrientation, YPositionBehavior.None, itemSize, new SKPoint(itemX, height - footerWithLegendHeight + Margin), LabelColor, labelSize, label, LabelTextSize, Typeface, Margin);
                 }
 
                 DrawLegend(canvas, seriesSizes, legendHeight, height, width);
@@ -256,7 +256,7 @@ namespace Microcharts
                 return;
             }
 
-            DrawHelper.DrawLabel(canvas, ValueLabelOrientation, YPositionBehavior.UpToElementHeight, barSize, new SKPoint(barX - (itemSize.Width / 2) + (barSize.Width / 2), headerWithLegendHeight - Margin), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface);
+            DrawHelper.DrawLabel(canvas, ValueLabelOrientation, YPositionBehavior.UpToElementHeight, barSize, new SKPoint(barX - (itemSize.Width / 2) + (barSize.Width / 2), headerWithLegendHeight - Margin), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], entry.ValueLabel, ValueLabelTextSize, Typeface, Margin);
         }
 
         /// <summary>

@@ -41,7 +41,7 @@ namespace Microcharts
             return entry.ValueLabelYPositionBehavior.GetValueOrDefault(defaultBehaviour);
         }
 
-        internal static void DrawLabel(SKCanvas canvas, Orientation orientation, YPositionBehavior yPositionBehavior, SKSize itemSize, SKPoint point, SKColor color, SKRect bounds, string text, float textSize, SKTypeface typeface, bool belowPoint = false)
+        internal static void DrawLabel(SKCanvas canvas, Orientation orientation, YPositionBehavior yPositionBehavior, SKSize itemSize, SKPoint point, SKColor color, SKRect bounds, string text, float textSize, SKTypeface typeface, float margin)
         {
             using (new SKAutoCanvasRestore(canvas))
             {
@@ -83,48 +83,54 @@ namespace Microcharts
                         // if no passed in size of the element we are drawing a label against, skip truncating the label
                         if(!itemSize.IsEmpty)
                         {
-                            if (bounds.Width > itemSize.Width)
+                            if(bounds.Width > itemSize.Width)
                             {
                                 text = text.Substring(0, Math.Min(3, text.Length));
                                 paint.MeasureText(text, ref bounds);
                             }
 
-                            if (bounds.Width > itemSize.Width)
+                            if(bounds.Width > itemSize.Width)
                             {
                                 text = text.Substring(0, Math.Min(1, text.Length));
                                 paint.MeasureText(text, ref bounds);
                             }
                         }
 
+                        var x = point.X - bounds.Width / 2;
                         var y = point.Y;
 
-                        switch (yPositionBehavior)
+                        switch(yPositionBehavior)
                         {
                             case YPositionBehavior.UpToElementHeight:
                                 y -= bounds.Height;
+
                                 break;
                             case YPositionBehavior.UpToElementMiddle:
                                 y -= bounds.Height / 2;
+
                                 break;
                             case YPositionBehavior.DownToElementMiddle:
                                 y += bounds.Height / 2;
+
                                 break;
                             case YPositionBehavior.DownToElementHeight:
                                 y += bounds.Height * 2;
+
                                 break;
                         }
 
                         // clamp to inside the control (left/right edges)
-                        var x = point.X - bounds.Width / 2;
-                        if(x < 0)
-                            x = 0;
-                        if(x > canvas.LocalClipBounds.Width - bounds.Width)
-                            x = canvas.LocalClipBounds.Width - bounds.Width;
+                        float clampRight = canvas.LocalClipBounds.Width - margin,
+                            clampBottom = canvas.LocalClipBounds.Height - margin;
+                        if(x < margin)
+                            x = margin / 2;
+                        if(x + bounds.Width > clampRight)
+                            x = clampRight - bounds.Width;
                         // also on the y axis
-                        if(y < 0)
-                            y = 0;
-                        if(y > canvas.LocalClipBounds.Height - bounds.Height)
-                            y = canvas.LocalClipBounds.Height - bounds.Height;
+                        if(y < margin)
+                            y = margin;
+                        if(y + bounds.Height > clampBottom)
+                            y = clampBottom;
 
                         canvas.Translate(x, y);
                     }
